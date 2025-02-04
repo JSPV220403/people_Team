@@ -1,5 +1,5 @@
-const user = require("../model/users"); // Correct import
-const moment = require("moment"); // Import moment
+const user = require("../model/users");
+const moment = require("moment");
 
 const controller = {};
 
