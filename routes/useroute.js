@@ -6,6 +6,5 @@ const validation= require("../middleware/validation.middleware")
 const userController = require("../controller/userController");
 
 router.post("/insert", validation.validateBody(validate.validateUser()),userController.Insert);
-router.post("/delete",userController.Delete)
 router.get("/", userController.findAll);
 module.exports = router;
