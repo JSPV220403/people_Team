@@ -56,7 +56,24 @@ controller.Delete= async (req,res)=>{
   }
   data.leftdate= new Date()
   data.save()
+  const t= await team.findOne({where:{team_id:data.team_id}})
+  t.team_count= t.team_count-1;
+  t.save()
   res.send({message:"Deleted Successfully"})
+}
+
+controller.addMembers= async(req,res)=>{
+  const {team_id,members=[]}= req.body;
+  const tdata= await team.findOne({where:{team_id}});
+  tdata.team_count= tdata.team_count+ members.length;
+  tdata.save()
+  const teamId= tdata.team_id;
+  for(const userId of members){
+    const udata= await user.findOne({where:{user_id:userId}})
+    udata.team_id= teamId;
+    udata.save()
+  }
+  res.send({message:"Added successfully in our team"})
 }
 
 module.exports = controller;
