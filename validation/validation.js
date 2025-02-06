@@ -3,9 +3,19 @@ const Joi = require('joi');
 // Team Validation
 const validateTeam = () => {
   const schema = Joi.object({
-    name: Joi.string().min(3).max(50).required(),
-    description: Joi.string().max(255).optional(),
-    members: Joi.array().items(Joi.number().integer().required()).optional(), // Array of member IDs (integers)
+    team_name: Joi.string().min(3).max(50).required(),
+    members: Joi.array().items(Joi.string()).required(), // Array of member IDs (as strings)
+    team_description: Joi.string().min(3).max(500).required(),
+  });
+  return schema;
+};
+
+const validateTeamUpdate = () => {
+  const schema = Joi.object({
+    team_id: Joi.string().min(3).max(50).required(),
+    team_name: Joi.string().min(3).max(50).required(),
+    members: Joi.array().items(Joi.string()).required(), // Array of member IDs (as strings)
+    team_description: Joi.string().min(3).max(500).required(),
   });
   return schema;
 };
@@ -23,4 +33,5 @@ const validateUser = () => {
 module.exports = {
   validateTeam,
   validateUser,
+  validateTeamUpdate,
 };
