@@ -76,4 +76,32 @@ controller.addMembers= async(req,res)=>{
   res.send({message:"Added successfully in our team"})
 }
 
+controller.Update = async (req, res) => {
+  try {
+    const {team_id, team_name, members = [], team_description } = req.body;
+    
+    
+   const data= await team.findOne({where:{team_id}})
+   data.team_name= team_name;
+   data.team_description= team_description;
+   data.team_count= members.length;
+   data.createddate= new Date()
+   data.save();
+
+    for (const userId of members) {
+      const userData = await user.findOne({ where: { user_id: userId } });
+      if (userData) {
+        userData.team_id=data.team_id;
+        userData.joineddate = new Date();
+        await userData.save();
+      }
+    }
+
+    res.status(200).json({ message: "Team Updated!" });
+
+  } catch (error) {
+    console.error("Error inserting team:", error);
+    res.status(500).json({ message: "Internal server error", error });
+  }
+};
 module.exports = controller;
