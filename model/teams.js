@@ -27,6 +27,10 @@ const team = sequelize.define("teams", {
   createddate:{
     type:DataTypes.DATE,
     allowNull:true
+  },
+  deactivateddate:{
+    type:DataTypes.DATE,
+    allowNull:true
   }
 }, {
   tableName: "teams", // Name of your database table
