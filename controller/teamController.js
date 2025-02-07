@@ -104,4 +104,12 @@ controller.Update = async (req, res) => {
     res.status(500).json({ message: "Internal server error", error });
   }
 };
+
+controller.teamDelete= async (req,res)=>{
+  const {team_id}= req.body;
+  const data= await team.findOne({where:{team_id}});
+  data.deactivateddate= new Date();
+  data.save();
+  res.send({message:"Team Deactivated"})
+}
 module.exports = controller;
