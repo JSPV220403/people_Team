@@ -11,5 +11,6 @@ router.post("/delete",teamController.Delete)
 router.post("/create",validation.validateBody(validate.validateTeam()),teamController.createTeam);
 router.post("/addmembers",teamController.addMembers);
 router.post("/updateteam",validation.validateBody(validate.validateTeamUpdate()),teamController.Update);
+router.post("/teamdelete",teamController.teamDelete);
 
 module.exports = router;
