@@ -9,7 +9,6 @@ const User = sequelize.define("users", {
   },
   user_id:{
     type: DataTypes.STRING,
-    unique:true,
   },
   name:{
     type: DataTypes.STRING,
