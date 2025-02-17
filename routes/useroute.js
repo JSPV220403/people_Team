@@ -7,4 +7,6 @@ const userController = require("../controller/userController");
 
 router.post("/insert", validation.validateBody(validate.validateUser()),userController.Insert);
 router.get("/", userController.findAll);
+router.post("/pin",userController.pin)
+
 module.exports = router;
