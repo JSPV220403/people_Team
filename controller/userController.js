@@ -47,4 +47,13 @@ controller.Insert = async (req, res) => {
   }
 };
 
+controller.pin= async (res,req)=>{
+  const {userId,teamId}= req.body;
+  const data= await user.findOne({
+    where:{user_id: userId, team_id:teamId}
+  })
+  data.pin= !data.pin;
+  data.save()
+}
+
 module.exports = controller;
